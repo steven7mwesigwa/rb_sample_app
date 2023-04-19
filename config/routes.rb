@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/help', to: 'static_pages#help',  as: 'help'
   get '/about', to: 'static_pages#about', as: 'about'
   get '/contact', to: 'static_pages#contact', as: 'contact'
-  # get '/signup', to: 'static_pages#signup', as: 'signup'
+  get '/signup', to: 'users#new', as: 'signup'
   # get '/login', to: 'static_pages#login', as: 'login'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
