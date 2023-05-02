@@ -8,6 +8,8 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 
   test "unsuccessful edit" do
 
+    log_in_as(@user)
+
     get edit_user_path(@user)
     assert_template 'users/edit'
 
@@ -23,6 +25,9 @@ class UsersEditTest < ActionDispatch::IntegrationTest
   end
 
   test "successful edit" do
+
+    log_in_as(@user)
+
     get edit_user_path(@user)
 
     assert_template 'users/edit'
