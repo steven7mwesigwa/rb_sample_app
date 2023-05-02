@@ -4,10 +4,8 @@ daqibet:
   name: daqibet
   email: piqaj@mailinator.com
   password_digest: <%= User.digest('password') %>
-#one:
-#  name: MyString
-#  email: MyString
 
-#two:
-#  name: MyString
-#  email: MyString
+archer:
+  name: Sterling Archer
+  email: duchess@example.gov
+  password_digest: <%= User.digest('password') %>

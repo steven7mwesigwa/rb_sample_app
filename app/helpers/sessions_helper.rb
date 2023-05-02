@@ -23,11 +23,17 @@ module SessionsHelper
       end
     elsif (user_id = cookies.encrypted[:user_id])
       user = User.find_by(id: user_id)
+
       if user && user.authenticated?(cookies[:remember_token])
         log_in user
         @current_user = user
       end
     end
+  end
+
+  # Returns true if the given user is the current user.
+  def current_user?(user)
+    user && user == current_user
   end
 
   # Returns true if the user is logged in, false otherwise.
