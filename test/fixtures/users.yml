@@ -4,6 +4,7 @@ daqibet:
   name: daqibet
   email: piqaj@mailinator.com
   password_digest: <%= User.digest('password') %>
+  admin: true
 
 archer:
   name: Sterling Archer
