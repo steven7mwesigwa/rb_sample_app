@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy", as: 'logout'
   resources :users
+  # URL: /account_activation/<token>/edit ; ACTION: edit ; NAMED ROUTE: edit_account _activation_url(token)
+  resources :account_activations, only: [:edit]
   # get '/login', to: 'static_pages#login', as: 'login'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
