@@ -44,6 +44,9 @@ Rails.application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
+  # Prepend all log lines with the following tags.
+  config.log_tags = [:request_id]
+
   # Raise exceptions for disallowed deprecations.
   config.active_support.disallowed_deprecation = :raise
 
@@ -71,7 +74,19 @@ Rails.application.configure do
   # Allow connections to local server on cloud IDE.
   config.hosts.clear
 
-  config.action_mailer.raise_delivery_errors = false
+  # Configuring Rails to send emails.
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+
+  # Use a different logger for distributed setups.
+  # require "syslog/logger"
+  # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
+
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
+    logger = ActiveSupport::Logger.new(STDOUT)
+    logger.formatter = config.log_formatter
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
+  end
 
   host = 'localhost:3000' # Don't use this literally; use your local dev host instead
 
@@ -80,4 +95,17 @@ Rails.application.configure do
 
   # Use this if developing on localhost.
   # config.action_mailer.default_url_options = { host: host, protocol: 'http' }
+
+  ActionMailer::Base.smtp_settings = {
+    :address => 'smtp.gmail.com',
+    :port => '587',
+    :authentication => :plain,
+    :user_name => ENV['GMAIL_EMAIL'],
+    :password => ENV['GMAIL_APP_PASSWD'],
+    :domain => 'heroku.com',
+    :enable_starttls_auto => true,
+    open_timeout:         5,
+    read_timeout:         5
+  }
+
 end

@@ -18,5 +18,15 @@ module RbSampleApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.before_configuration do
+
+      if ENV.fetch("RAILS_ENV", "development") == "development"
+        env_file = File.join(Rails.root, 'config', 'local_env.yml')
+        YAML.load(File.open(env_file)).each do |key, value|
+          ENV[key.to_s] = value
+        end if File.exists?(env_file)
+      end
+    end
   end
 end
