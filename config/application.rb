@@ -21,7 +21,7 @@ module RbSampleApp
 
     config.before_configuration do
 
-      if ENV.fetch("RAILS_ENV", "development") == "development"
+      if ENV.fetch("RAILS_ENV", "development") != "production"
         env_file = File.join(Rails.root, 'config', 'local_env.yml')
         YAML.load(File.open(env_file)).each do |key, value|
           ENV[key.to_s] = value

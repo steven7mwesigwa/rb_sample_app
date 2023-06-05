@@ -8,7 +8,7 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal "Account activation", mail.subject
     assert_equal [user.email], mail.to
-    assert_equal ["stevekats1356@gmail.com"], mail.from
+    assert_equal [ENV['GMAIL_EMAIL']], mail.from
 
     assert_match user.name, mail.body.encoded
     assert_match user.activation_token, mail.body.encoded
@@ -20,7 +20,7 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal "Password reset", mail.subject
     assert_equal ["to@example.org"], mail.to
-    assert_equal ["stevekats1356@gmail.com"], mail.from
+    assert_equal [ENV['GMAIL_EMAIL']], mail.from
 
     assert_match "Hi", mail.body.encoded
   end
